@@ -32,3 +32,4 @@ The project includes a full shopping experience with authentication, cart manage
 ```bash
 npm install
 ng serve
+npx json-server --watch users.json --port 3001
