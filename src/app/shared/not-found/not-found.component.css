@@ -1,0 +1,11 @@
+.nf {
+  min-height: 70vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.nf h1 {
+  font-size: 5rem;
+}

@@ -1,0 +1,93 @@
+<div class="page">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="kicker">Profile</div>
+    <h1 class="headline">Edit Profile</h1>
+    <p class="sub">Update your account information</p>
+  </header>
+
+  <!-- LAYOUT -->
+  <section class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-label="Profile menu">
+      <div class="filterCard">
+        <div class="filterTitle">Account</div>
+
+        <div class="filterSection">
+          <div class="brandTabs">
+            <a class="tab" routerLink="/profile">User details</a>
+            <a class="tab active" routerLink="/profile/edit">Edit profile</a>
+            <button class="tab" type="button" (click)="cancel()">Back</button>
+          </div>
+        </div>
+
+        <div class="filterSection">
+          <p class="tinyNote">
+            Changes are saved in local json-server users.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content">
+      <p class="loading" *ngIf="isLoading">Loading...</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+      <form
+        class="card editCard"
+        *ngIf="!isLoading && user"
+        [formGroup]="form"
+        (ngSubmit)="save()"
+      >
+        <div class="sectionTitle">Details</div>
+
+        <div class="row">
+          <label>Email (read-only)</label>
+          <input type="email" [value]="user.email" disabled />
+        </div>
+
+        <div class="row">
+          <label>Full Name</label>
+          <input type="text" formControlName="fullName" placeholder="Your name" />
+          <small class="hint" *ngIf="form.get('fullName')?.touched && form.get('fullName')?.invalid">
+            Full name is required (min 2).
+          </small>
+        </div>
+
+        <div class="row">
+          <label>Birth Date</label>
+          <input type="date" formControlName="birthDate" min="1900-01-01" max="2015-12-31" />
+          <small class="hint" *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid">
+            Birth date is required.
+          </small>
+        </div>
+
+        <div class="row">
+          <label>Gender</label>
+          <select formControlName="gender">
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label>Image URL (optional)</label>
+          <input type="text" formControlName="imageUrl" placeholder="assets/user/male.png" />
+          <small class="muted">Paste an image URL or leave empty.</small>
+        </div>
+
+        <div class="actions">
+          <button class="btnPrimary" type="submit" [disabled]="isLoading || form.invalid">
+            Save changes
+          </button>
+
+          <button class="btnGhost" type="button" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </main>
+  </section>
+</div>

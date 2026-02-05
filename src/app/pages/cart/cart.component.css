@@ -1,0 +1,404 @@
+:host{
+  display:block;
+  background: inherit;
+  color: inherit;
+}
+
+/* ===== Tokens ===== */
+.bagPage{
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: rgba(17,17,17,.70);
+  --line: rgba(0,0,0,.12);
+  --field: rgba(0,0,0,.03);
+  --blue: #ff8a00;
+
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 18px 70px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+:host-context(.dark) .bagPage{
+  --bg: #0f1012;
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.70);
+  --line: rgba(255,255,255,.14);
+  --field: rgba(255,255,255,.06);
+  --blue: #ff8a00;
+}
+
+/* ===== Header ===== */
+.bagHeader{
+  text-align:center;
+  padding: 10px 0 8px;
+}
+
+.bagTitle{
+  margin: 8px 0 6px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1.4;
+  color: var(--muted);
+  text-transform: none;
+  text-align: center;
+}
+
+.bagTitle .money{
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.money{ font-variant-numeric: tabular-nums; }
+
+.bagSub{
+  margin: 0 0 16px;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* CTAs - clean */
+.bagCtas{
+  display:flex;
+  justify-content:center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ctaApplePay,
+.ctaGhost,
+.ctaBlue{
+  height: 44px;
+  min-width: 240px;
+  padding: 0 16px;
+  border-radius: 14px;
+
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: 12px;
+
+  border: 1px solid var(--line);
+  cursor:pointer;
+  transition: transform .18s ease, background .18s ease, opacity .18s ease, border-color .18s ease;
+}
+
+.ctaApplePay{
+  background: transparent;
+  color: var(--text);
+  opacity: .92;
+}
+.ctaApplePay:hover{
+  transform: translateY(-1px);
+  background: var(--field);
+  opacity: 1;
+}
+
+.ctaGhost{
+  background: transparent;
+  color: var(--text);
+  opacity: .92;
+}
+.ctaGhost:hover{
+  transform: translateY(-1px);
+  background: var(--field);
+  opacity: 1;
+}
+
+.ctaBlue{
+  border-color: transparent;
+  background: var(--blue);
+  color:#fff;
+}
+.ctaBlue:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.ctaApplePay.big,
+.ctaGhost.big,
+.ctaBlue.big{
+  height: 52px;
+  border-radius: 16px;
+}
+
+/* ===== Dividers ===== */
+.rule{
+  border:none;
+  height:1px;
+  background: var(--line);
+  margin: 22px 0;
+}
+
+/* ===== Items list ===== */
+.bagItems{
+  display:flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* each item = clean row with light separator */
+.bagItem{
+  display:grid;
+  grid-template-columns: 110px 1fr 90px 140px;
+  grid-template-areas:
+    "img info qty price"
+    "meta meta meta meta";
+  gap: 10px 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.bagItem:last-child{
+  border-bottom: none;
+}
+
+.itemImg{ grid-area: img; display:flex; align-items:center; justify-content:center; }
+.itemImg img{
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  display:block;
+}
+
+.itemInfo{ grid-area: info; padding-top: 4px; }
+.itemName{
+  font-family:"Georgia","Times New Roman",serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+/* qty */
+.itemQty{
+  grid-area: qty;
+  padding-top: 6px;
+  display:flex;
+  justify-content:flex-start;
+}
+.qtySelect{
+  width: 78px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  padding: 0 10px;
+  background: transparent;
+  color: var(--text);
+
+  font-weight: 800;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-size: 12px;
+  outline: none;
+}
+.qtySelect:focus{
+  background: var(--field);
+}
+
+/* price */
+.itemPrice{
+  grid-area: price;
+  text-align:right;
+  padding-top: 4px;
+}
+.priceBig{
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* remove: subtle */
+.removeLink{
+  margin-top: 8px;
+  border:none;
+  background:transparent;
+  color: var(--blue);
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 0;
+  cursor:pointer;
+  opacity: .85;
+}
+.removeLink:hover{ text-decoration: underline; opacity: 1; }
+
+/* meta: lighter + smaller */
+.itemMeta{
+  grid-area: meta;
+  padding-top: 2px;
+}
+
+.metaLine{
+  display:flex;
+  gap: 8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.metaText{
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+
+.metaLink{
+  border:none;
+  background:transparent;
+  color: var(--blue);
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 11px;
+  cursor:pointer;
+  padding: 0;
+  opacity: .9;
+}
+.metaLink:hover{ text-decoration: underline; opacity: 1; }
+
+.metaRow{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  margin-top: 10px;
+}
+
+.metaPill{
+  font-size: 11px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* we don't need per-item HR anymore */
+.itemRule{ display:none; }
+
+/* ===== Totals ===== */
+.totals{
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.totRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.totLabel{
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.totValue{
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.inlineLink{
+  border:none;
+  background:transparent;
+  color: var(--blue);
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 11px;
+  cursor:pointer;
+  padding: 0;
+}
+.inlineLink:hover{ text-decoration: underline; }
+
+.totRule{
+  border:none;
+  height:1px;
+  background: var(--line);
+  margin: 12px 0;
+}
+
+.totTotal .totLabel{
+  color: var(--text);
+}
+.totTotal .totValue{
+  font-size: 13px;
+}
+
+/* bottom buttons */
+.bottomCtas{
+  display:flex;
+  gap: 12px;
+  justify-content:center;
+  margin-top: 16px;
+}
+
+/* help */
+.helpLine{
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.helpLink{
+  color: var(--blue);
+  font-weight: 900;
+  text-decoration:none;
+}
+.helpLink:hover{ text-decoration: underline; }
+
+/* empty */
+.bagPage.empty{
+  text-align:center;
+  padding: 44px 18px;
+}
+.bagPage.empty .bagTitle{
+  font-size: 28px;
+}
+.bagPage.empty .bagSub{
+  margin-top: 8px;
+}
+
+/* responsive */
+@media (max-width: 860px){
+  .bagTitle{ font-size: 28px; }
+
+  .bagItem{
+    grid-template-columns: 100px 1fr;
+    grid-template-areas:
+      "img info"
+      "img qty"
+      "img price"
+      "meta meta";
+  }
+
+  .itemPrice{ text-align:left; }
+  .bagCtas, .bottomCtas{
+    flex-direction: column;
+    align-items:center;
+  }
+  .ctaApplePay, .ctaGhost, .ctaBlue{
+    width: 100%;
+    max-width: 420px;
+  }
+}

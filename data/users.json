@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": "7ae8",
+      "email": "chen@me.com",
+      "password": "123456",
+      "fullName": "Chen Cohen",
+      "birthDate": "2001-03-14",
+      "gender": "male",
+      "imageUrl": "assets/user/male.png",
+      "role": "admin"
+    },
+    {
+      "id": "fd08",
+      "email": "admin@gmail.com",
+      "password": "Admin123!@#",
+      "fullName": "admin",
+      "birthDate": "2002-12-12",
+      "gender": "female",
+      "imageUrl": "assets/user/female.png",
+      "role": "admin"
+    }
+  ]
+}

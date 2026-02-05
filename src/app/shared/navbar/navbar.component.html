@@ -1,0 +1,82 @@
+<nav class="nav">
+  <a class="brand" routerLink="/" (click)="closeMenu()">
+    <span>Chen & Co</span>
+  </a>
+
+  <button
+    class="burger"
+    type="button"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen"
+    aria-label="Open menu"
+  >
+    <i class="bx" [ngClass]="menuOpen ? 'bx-x' : 'bx-menu'"></i>
+  </button>
+
+  <div class="links" [class.open]="menuOpen">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
+      <i class="bx bx-home"></i> Home
+    </a>
+
+    <a routerLink="/catalog" routerLinkActive="active" (click)="closeMenu()">
+      <i class="bx bx-grid-alt"></i> Catalog
+    </a>
+
+    <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">
+      <i class="bx bx-cart"></i> Cart
+    </a>
+
+    <a routerLink="/about-us" routerLinkActive="active" (click)="closeMenu()">
+      <i class="bx bx-info-square"></i> About
+    </a>
+
+    <!-- Login -->
+    <a *ngIf="!user" routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">
+      <i class="bx bx-log-in"></i> Login
+    </a>
+
+    <!-- Profile (non-admin) -->
+    <a
+      *ngIf="user && !isAdmin"
+      routerLink="/profile/user-details"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <i class="bx bx-user"></i> Profile
+    </a>
+
+    <!-- Admin -->
+    <a
+      *ngIf="user && isAdmin"
+      routerLink="/admin/users"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+    >
+      <i class="bx bx-shield-quarter"></i> Admin
+    </a>
+
+    <!-- User box -->
+    <div *ngIf="user" class="user-box">
+      <img
+        class="avatar"
+        [src]="user.imageUrl || user.image || 'assets/user/male.png'"
+        alt="User avatar"
+      />
+      <span class="hello">Hi, {{ user.fullName }}</span>
+
+      <button class="logout" type="button" (click)="logout(); closeMenu()">
+        <i class="bx bx-log-out"></i> Logout
+      </button>
+    </div>
+
+    <!-- Dark mode mobile -->
+    <button class="btn btn-mobile" type="button" (click)="toggleDarkMode()">
+      <i class="bx" [ngClass]="theme.isDark() ? 'bx-sun' : 'bx-moon'"></i>
+    </button>
+  </div>
+
+  <!-- Dark mode desktop -->
+  <button class="btn btn-desktop" type="button" (click)="toggleDarkMode()">
+    <i class="bx" [ngClass]="theme.isDark() ? 'bx-sun' : 'bx-moon'"></i>
+  </button>
+</nav>

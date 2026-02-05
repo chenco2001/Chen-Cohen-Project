@@ -1,0 +1,156 @@
+:host {
+  display: block;
+}
+
+/* ===== Page wrapper ===== */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 18px 80px;
+  color: var(--text, #111);
+}
+
+/* ===== Title ===== */
+.page > h1 {
+  margin: 0 0 36px;
+  font-size: 44px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* ===== Profile card ===== */
+.profile {
+  max-width: 520px;
+  margin: 0 auto;
+
+  padding: 36px 32px 40px;
+
+  border: 1px solid var(--line, rgba(0,0,0,.12));
+  border-radius: 22px;
+
+  background: color-mix(in srgb, var(--surface, #fff) 92%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 22px 60px rgba(0,0,0,.08);
+  text-align: center;
+}
+
+/* ===== Avatar ===== */
+.avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  object-fit: cover;
+
+  border: 1px solid var(--line, rgba(0,0,0,.12));
+  background: linear-gradient(180deg,#fafafa,#f1f1f1);
+}
+
+/* ===== Name + ID ===== */
+.title {
+  margin: 10px 0 6px;
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: .01em;
+}
+
+.id {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .55;
+}
+
+/* ===== Role ===== */
+.role {
+  margin: 0 0 16px;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--muted, rgba(17,17,17,.65));
+}
+
+/* ===== Bio ===== */
+.bio {
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted, rgba(17,17,17,.75));
+}
+
+/* ===== Email link ===== */
+.email {
+  display: inline-block;
+  margin-top: 6px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+
+  color: var(--text, #111);
+  text-decoration: none;
+
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  opacity: .85;
+}
+
+.email:hover {
+  opacity: 1;
+}
+
+/* ===== Dark mode ===== */
+:host-context(.dark) .page {
+  color: rgba(255,255,255,.92);
+}
+
+:host-context(.dark) .profile {
+  background: rgba(18,18,19,.78);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: 0 26px 70px rgba(0,0,0,.55);
+}
+
+:host-context(.dark) .avatar {
+  background: linear-gradient(180deg,#1c1c1d,#141415);
+  border-color: rgba(255,255,255,.16);
+}
+
+:host-context(.dark) .role,
+:host-context(.dark) .bio {
+  color: rgba(255,255,255,.72);
+}
+
+:host-context(.dark) .email {
+  color: rgba(255,255,255,.92);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .page {
+    padding-top: 32px;
+  }
+
+  .page > h1 {
+    font-size: 36px;
+  }
+
+  .profile {
+    padding: 28px 22px 32px;
+  }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+  }
+}

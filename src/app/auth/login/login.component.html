@@ -1,0 +1,37 @@
+
+<div *ngIf="loggedInUser" class="messages">
+  <p>You are already logged in as <b>{{ loggedInUser.fullName || loggedInUser.email }}</b></p>
+  <button type="button" (click)="logout()">Logout</button>
+  <a routerLink="/profile/user-details">User details</a>
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+  <div class="field">
+
+    <h1>Welcome</h1>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+    <small *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+      Please enter a valid email.
+    </small>
+  </div>
+
+  <div class="field">
+    <label>Password</label>
+    <input type="password" formControlName="password" />
+    <small *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+      Password is required.
+    </small>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <p class="hint success" *ngIf="success">Login successful!</p>
+
+  <button type="submit" [disabled]="loginForm.invalid || loading">
+    {{ loading ? 'Loading...' : 'Login' }}
+  </button>
+
+  <p class="hint">
+    No account? <a routerLink="/profile/register">Register</a>
+  </p>
+</form>

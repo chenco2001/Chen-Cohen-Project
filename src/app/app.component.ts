@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'project';
+
+  onOverlayActivate(cmp: any) {
+  console.log('✅ OVERLAY OUTLET ACTIVATED:', cmp?.constructor?.name);
+}
 }

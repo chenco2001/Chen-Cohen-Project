@@ -1,0 +1,58 @@
+<section class="page" *ngIf="product; else notFound">
+  <header class="hero">
+    <h1>{{ product.name }}</h1>
+    <p class="meta">
+      {{ product.brand | uppercase }} • {{ prettyCategory(product.category) }}
+    </p>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="media">
+        <img
+          [src]="product.image"
+          [alt]="product.name"
+          loading="lazy"
+          (error)="product.image='assets/catalog/placeholder.jpg'"
+        />
+      </div>
+
+      <div class="body">
+        <div class="price">{{ product.price }} $</div>
+        <p class="summary">{{ product.summary }}</p>
+
+        <div class="actions">
+          <button class="cta" type="button" (click)="addToCart()">
+            <i class="bx bx-cart"></i>
+            Add to cart
+          </button>
+
+          <button class="cta details" type="button" (click)="backToCatalog()">
+            <i class="bx bx-left-arrow-alt"></i>
+            Back catalog
+          </button>
+
+          <button class="cta home" type="button" (click)="goHome()">
+            <i class="bx bx-home"></i>
+            Go to home
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #notFound>
+  <section class="page">
+    <header class="hero">
+      <h1>Product not found</h1>
+      <p class="meta">The product id in the URL does not exist.</p>
+    </header>
+
+    <div class="wrap">
+      <button class="cta details" type="button" (click)="backToCatalog()">
+        Go to catalog
+      </button>
+    </div>
+  </section>
+</ng-template>

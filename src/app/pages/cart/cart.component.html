@@ -1,0 +1,117 @@
+<section class="bagPage" *ngIf="cartService.getCart().length > 0; else emptyTpl">
+
+  <header class="bagHeader">
+    <h1 class="bagTitle">
+      Your bag total is
+      <span class="money">{{ cartService.total() | number:'1.2-2' }}</span>$.
+    </h1>
+    <p class="bagSub">Free delivery and free returns.</p>
+
+    <div class="bagCtas">
+      <button class="ctaGhost" type="button" (click)="clearCart()">Clear cart</button>
+
+      <button
+        class="ctaBlue"
+        type="button"
+        *ngIf="isLoggedIn; else loginToPayTpl"
+        (click)="pay()"
+      >
+        Check Out
+      </button>
+
+      <ng-template #loginToPayTpl>
+        <button class="ctaBlue" type="button" (click)="goToLogin()">
+          Login to pay
+        </button>
+      </ng-template>
+    </div>
+  </header>
+
+  <hr class="rule" />
+
+  <section class="bagItems">
+    <article class="bagItem" *ngFor="let item of cartService.getCart(); let last = last">
+
+      <div class="itemImg">
+        <img
+          [src]="item.product.image"
+          [alt]="item.product.name"
+          (error)="item.product.image='assets/catalog/placeholder.jpg'"
+        >
+      </div>
+
+      <div class="itemInfo">
+        <div class="itemName">{{ item.product.name }}</div>
+      </div>
+
+      <div class="itemQty">
+        <select
+          class="qtySelect"
+          [ngModel]="item.qty"
+          (ngModelChange)="setQty(item, $event)"
+        >
+          <option *ngFor="let q of qtyOptions" [value]="q">{{ q }}</option>
+        </select>
+      </div>
+
+      <div class="itemPrice">
+        <div class="priceBig">{{ lineTotal(item) | number:'1.2-2' }}$</div>
+
+        <button class="removeLink" type="button" (click)="remove(item)">
+          Remove
+        </button>
+      </div>
+
+      <hr class="itemRule" *ngIf="!last" />
+    </article>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="totals">
+    <div class="totRow">
+      <div class="totLabel">Subtotal</div>
+      <div class="totValue">{{ cartService.total() | number:'1.2-2' }}$</div>
+    </div>
+
+    <div class="totRow">
+      <div class="totLabel">Shipping</div>
+      <div class="totValue">FREE</div>
+    </div>
+
+    <hr class="totRule" />
+
+    <div class="totRow totTotal">
+      <div class="totLabel">Total</div>
+      <div class="totValue">{{ cartService.total() | number:'1.2-2' }}$</div>
+    </div>
+
+    <div class="bottomCtas">
+      <button class="ctaGhost big" type="button" (click)="clearCart()">Clear cart</button>
+
+      <button
+        class="ctaBlue big"
+        type="button"
+        *ngIf="isLoggedIn; else loginToPayTplBottom"
+        (click)="pay()"
+      >
+        Check Out
+      </button>
+
+      <ng-template #loginToPayTplBottom>
+        <button class="ctaBlue big" type="button" (click)="goToLogin()">
+          Login to pay
+        </button>
+      </ng-template>
+    </div>
+  </section>
+
+</section>
+
+<ng-template #emptyTpl>
+  <section class="bagPage empty">
+    <h1 class="bagTitle">Your bag is empty.</h1>
+    <p class="bagSub">Browse the catalog and add something you love.</p>
+    <button class="ctaBlue big" routerLink="/catalog">Browse Catalog</button>
+  </section>
+</ng-template>

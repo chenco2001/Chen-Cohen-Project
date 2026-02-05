@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: inherit;
+  color: inherit;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 96px 16px 16px; 
+  box-sizing: border-box;
+
+  background: inherit;
+  color: inherit;
+}

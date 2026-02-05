@@ -1,0 +1,125 @@
+<div class="page">
+
+  <!-- HERO (no big right image) -->
+  <section class="hero">
+    <div class="heroCard">
+      <div class="kickerRow">
+        <div class="kicker">Chen & Co.</div>
+        <div class="pill">
+          <i class="bx bx-check-shield"></i>
+          Secure checkout
+        </div>
+      </div>
+
+      <h1 class="headline">Premium Store</h1>
+      <p class="sub">Clean shopping. Top devices. Fast checkout.</p>
+
+      <div class="actions">
+        <a class="btnPrimary" routerLink="/catalog">Browse Catalog</a>
+        <a class="btnGhost" routerLink="/cart">View Cart</a>
+      </div>
+
+      <div class="meta">
+        <span><i class="bx bx-package"></i> Fast delivery</span>
+        <span><i class="bx bx-refresh"></i> Easy returns</span>
+        <span><i class="bx bx-support"></i> Support</span>
+        <a class="ghostLink" routerLink="/this-page-does-not-exist">
+          <i class="bx bx-bug"></i>
+          Broken link test
+        </a>
+      </div>
+    </div>
+
+    <!-- MINI PICKS -->
+    <div class="miniPicks" *ngIf="topPicks.length">
+      <div class="miniHead">
+        <div class="miniTitle">Top picks</div>
+        <div class="miniSub">This week</div>
+      </div>
+
+      <div class="miniGrid">
+        <button
+          class="miniItem"
+          type="button"
+          *ngFor="let p of topPicks | slice:0:3"
+          (click)="add(p)"
+          title="Add to cart"
+        >
+          <div class="miniImg">
+            <img [src]="p.image" [alt]="p.name" />
+          </div>
+
+          <div class="miniInfo">
+            <div class="miniName">{{ p.name }}</div>
+            <div class="miniPrice">${{ p.price }}</div>
+
+            <!-- ⭐ rating -->
+            <div class="miniRating" *ngIf="starParts(p.rating) as s">
+              <ng-container *ngFor="let _ of range(s.full)">
+                <i class="bx bxs-star"></i>
+              </ng-container>
+
+              <ng-container *ngIf="s.half">
+                <i class="bx bxs-star-half"></i>
+              </ng-container>
+
+              <ng-container *ngFor="let _ of range(s.empty)">
+                <i class="bx bx-star"></i>
+              </ng-container>
+
+              <span class="miniScore">{{ p.rating }}</span>
+            </div>
+          </div>
+
+          <div class="miniIcon">
+            <i class="bx bx-plus"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP PICKS -->
+  <section class="section">
+    <div class="sectionHead">
+      <h2>Top Picks</h2>
+      <a class="link" routerLink="/catalog">View all →</a>
+    </div>
+
+    <div class="grid">
+      <div class="card" *ngFor="let p of topPicks">
+        <div class="imgWrap">
+          <img [src]="p.image" [alt]="p.name">
+        </div>
+
+        <div class="info">
+          <div class="name">{{ p.name }}</div>
+          <div class="price">${{ p.price }}</div>
+
+          <!-- ⭐ rating -->
+          <div class="rating" *ngIf="starParts(p.rating) as s">
+            <ng-container *ngFor="let _ of range(s.full)">
+              <i class="bx bxs-star"></i>
+            </ng-container>
+
+            <ng-container *ngIf="s.half">
+              <i class="bx bxs-star-half"></i>
+            </ng-container>
+
+            <ng-container *ngFor="let _ of range(s.empty)">
+              <i class="bx bx-star"></i>
+            </ng-container>
+
+            <span class="score">{{ p.rating }}</span>
+          </div>
+        </div>
+
+      <div class="actionsRow">
+        <button class="add" type="button" (click)="add(p)">Add to cart</button>
+        <button class="View" type="button" (click)="view(p)">View details</button>
+      </div>
+      </div>
+    </div>
+  </section>
+
+</div>
